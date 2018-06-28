@@ -1,0 +1,54 @@
+
+ROM used:   976/32768 (3%)
+            976/32768 (3%) including unused fragments
+
+            1.1 Average locations per line
+            18.1 Average locations per statement
+
+RAM used:   47/2048 (2%) at main() level
+            57/2048 (3%) worst case
+
+Stack used: 2 worst case (1 in main + 1 for interrupts)
+Stack size: 31
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  128    54 100  main.c
+  779     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F2553.h
+    3     0   0  Definitions.h
+----- -----
+  910    54 Total
+
+Page ROM  %  RAM    Vol Diff  Functions:
+---- --- --- ---    --- ----  ----------
+0     38   2    1             @delay_ms1
+0     36   2    0    154  3.5  t0
+0    256  13    1    633  4.4  MAIN
+0     56   3    2             @ITOF
+0    242  12   11             @MULFF
+0     56   3    4             @SFTOI
+0     74   4    0    349  2.4  Motor1_Start
+0     48   2    0    195  1.4  start_alert
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               4
+    Statements              54
+    Comments                171
+    Volume (V)              1807
+    Difficulty (D)          11.3
+    Effort to implement (E) 20421
+    Time to implement (T)   19 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   2
+    Maintainability (MI)    65
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00002     4  0  
+00004-00006     0  4  
+00008-000AC   166  0  
+000AE-07FFE   806  31788  
+
+
+
