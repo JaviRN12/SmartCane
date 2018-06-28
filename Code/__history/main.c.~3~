@@ -22,8 +22,7 @@ enum Power
 {
    POWER_OFF = 4,  //80% Off
    POWER_ON  = 5,   //20% On
-   VoltajeMax  = 5.0,
-   AdcCountMax = 4095.0
+   VoltajeMax  = 5.0
 };
 
 void Motor1_Start();
@@ -71,9 +70,9 @@ void main()
       delay_us(10);
       data_adc0 = read_adc();
       
-      volt_adc0 = (float) (data_adc0 * (VoltajeMax / AdcCountMax));
+      volt_adc0 = (float) (data_adc0 * (5.0 / 4095.0));
       
-      Pa = (int8)(data_adc0*(100.0/AdcCountMax));
+      Pa = (int8)(data_adc0*(100.0/4095.0));
       duty1 = (int8) data_adc0;//*(99.0/255.0);
       set_pwm1_duty((int8)(volt_adc0*120.0));
       

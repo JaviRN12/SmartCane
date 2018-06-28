@@ -1,0 +1,2 @@
+#define MAX_TIMER_PRESET 65535
+#define DELAY_SET_ADC    10

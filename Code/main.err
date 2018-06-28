@@ -1,0 +1,8 @@
+>>> Warning 202 "main.c" Line 14(15,21): Variable never used:   t_flag
+>>> Warning 202 "main.c" Line 16(18,27): Variable never used:   data_adc1
+>>> Warning 202 "main.c" Line 16(33,35): Variable never used:   Pb
+>>> Warning 202 "main.c" Line 17(18,27): Variable never used:   volt_adc1
+>>> Warning 202 "main.c" Line 18(12,17): Variable never used:   duty2
+      Memory usage:   ROM=3%      RAM=2% - 3%
+      0 Errors,  5 Warnings.
+Build Successful.
