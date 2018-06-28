@@ -8,7 +8,7 @@
 //#use delay (crystal = 20000000)
 
 //#define set_zero(x) x=0 
-//#define get_voltage(dataADC) (float) (dataADC * (5.0 / 4095.0))
+#define get_voltage(dataADC) (float) (dataADC * (5.0 / 4095.0))
 
 
 int duty = 0, t_flag = 0;
