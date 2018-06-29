@@ -1,2 +1,15 @@
 #define MAX_TIMER_PRESET 65535
 #define DELAY_SET_ADC    10
+#define buf_length 255
+#define Send_Message input(pin_B3)
+
+int str_flag = 0, t_flag = 0, flag_buf = 0, str_flag2=0;
+int duty = 0, duty1, duty2;
+int counterLED = 0, i = 0;
+char c, str[buf_length], buf[buf_length];
+char LatRead[10], LonRead[10];
+int16 data_adc0, data_adc1, Pa, Pb;
+float volt_adc0, volt_adc1;
+float latitud=0, longitud=0;
+char _Cel1[8], _Cel2[8];
+float Num1, Num2;
