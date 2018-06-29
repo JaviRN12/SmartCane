@@ -12,7 +12,6 @@
 //#use delay (crystal = 20000000)
 //#define set_zero(x) x=0 
 //#define get_voltage(dataADC) (FLOAT) (dataADC * (5.0 / 4095.0))
-   
 enum Power
 {
    POWER_OFF = 4, //80 % Off
@@ -54,7 +53,7 @@ void rda_isr()
          flag_buf = 0;
          str_flag = 1; //flag must be cleared by software
          c = 0; //fin de la trama
-         strcpy (str, buf); //copia en str lo que está en bufer
+         strcpy (str, buf); //copia en str lo que estï¿½ en bufer
       }
 
       ELSE
