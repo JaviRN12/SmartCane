@@ -8,19 +8,10 @@
 #use RS232(uart1,BAUD=9600, BITS=8, PARITY=N, XMIT=PIN_C6, RCV=PIN_C7,STREAM = DATA1)
 #include <stdlib.h>
 #include <stdio.h>
-#define MAX_TIMER_PRESET 60000
-#define DELAY_SET_ADC    10
-#define MIN_ADC_MEASURE 242
-#define MAX_POWER 255
-#define LIMTED_POWER 180
-#define ADC_SAMPLES 1
-#define get_voltage(dataADC) (float) (dataADC * (5.0 / 1023.0))// 4095.0))
-
-int counterLED = 0;
-int samplesCounter = 0;
-float meanfilter = 0;
-int16 filterbuffer = 0;
-
+//#include "audio_buzzer.c"
+//#use delay (crystal = 20000000)
+//#define set_zero(x) x=0 
+//#define get_voltage(dataADC) (FLOAT) (dataADC * (5.0 / 4095.0))
 enum Power
 {
    POWER_OFF = 4, //80 % Off
@@ -114,15 +105,14 @@ void t0()
 
 void main()
 {
-   setup_oscillator( OSC_8MHZ | OSC_INTRC ); 
-   setup_adc (ADC_CLOCK_INTERNAL);   
-   setup_adc_ports (AN0 | VSS_VDD); //Read ADC0
-   
-   enable_interrupts(INT_RDA);
-   enable_interrupts(INT_TIMER0);
-   enable_interrupts(GLOBAL);
-   set_timer0( MAX_TIMER_PRESET );
-   setup_timer_0( T0_DIV_1 );
+   setup_oscillator (OSC_8MHZ|OSC_INTRC);
+   setup_adc (ADC_CLOCK_INTERNAL);
+   setup_adc_ports (AN0|VSS_VDD); //Read ADC0
+   enable_interrupts (INT_RDA);
+   enable_interrupts (INT_TIMER0);
+   enable_interrupts (GLOBAL);
+   set_timer0 (MAX_TIMER_PRESET);
+   setup_timer_0 (T0_DIV_1);
    
    //Setup_Oscillator parameter not selected from Intr Oscillator Config tab
    Motor1_Start ();
@@ -134,30 +124,15 @@ void main()
    WHILE (TRUE)
    {
       
-      set_adc_channel(0);
-      delay_us(10);
-      data_adc0 = read_adc();
-     /* samplesCounter++;
-      filterbuffer = filterbuffer + data_adc0;
-      if(ADC_SAMPLES == samplesCounter)
-      {
-         meanfilter = (float)(filterbuffer / ADC_SAMPLES);
-         filterbuffer = 0;
-      }
-      */
+      set_adc_channel (0);
+      delay_us (10);
+      data_adc0 = read_adc ();
       
-      if( MIN_ADC_MEASURE > data_adc0)
-      {
-         output_toggle(pin_a5);
-         duty1 = MAX_POWER;
-      }
-      else
-      {
-         duty1 = (float) ( LIMTED_POWER ) - ( data_adc0 - 240 )*( 255.0/1023.0 );
-      }
-      //volt_adc0 = get_voltage(data_adc0);
+      volt_adc0 = (FLOAT) (data_adc0 * (VoltajeMax / AdcCountMax));
       
-      set_pwm1_duty((int8)duty1);
+      Pa = (INT8) (data_adc0 * (100.0 / AdcCountMax));
+      duty1 = (INT8) data_adc0; //* (99.0 / 255.0);
+      set_pwm1_duty ( (INT8) (volt_adc0 * 120.0));
       
       /* output_high (pin_a4) ;
       delay_ms (500);
