@@ -20,11 +20,6 @@ int counterLED = 0;
 int samplesCounter = 0;
 float meanfilter = 0;
 int16 filterbuffer = 0;
-int GPS_Cnt = 0, Us_Cnt = 0, GPS_Connected = 0;
-int Save_flag = 0;
-int GPS_Counter = 0;
-char LatWrite[10];
-char LonWrite[10];
 
 enum Power
 {
@@ -115,20 +110,6 @@ void t0()
       counterLED = 0;
    }
 
-   GPS_Counter++;
-   if(GPS_Counter == 80)
-   {
-      if(t_flag == 1)
-      {
-          t_flag = 0;
-      }
-      else
-      {
-          t_flag = 1;
-      }
-      GPS_Counter = 0;
-   //   output_toggle(pin_e2);
-   }
    
    set_timer0 (MAX_TIMER_PRESET);
 }
@@ -185,8 +166,7 @@ void main()
       // Get current GPS position
       Get_GPS();
       
-      // Alert that GPS is Connected/Disconnected
-      // NOTE: Change set_pwm1_duty to set_pwm2_duty when buzzer works properly
+      /// Alert that GPS is Connected/Disconnected
       if(latitud > 0.5 && GPS_Connected == 0)
       {
         //GPS Connected
@@ -210,45 +190,6 @@ void main()
         delay_ms(500);
         set_pwm1_duty(0);
         GPS_Connected = 0;
-      }
-      
-      // First store position into eeprom memory every 80 cycles of T0
-      // then read it and store into arrays
-      if(t_flag == 0)
-      {
-         //printf("Lat: %f, Lon: %f\n\r", latitud, longitud);
-         if(Save_flag == 1)
-         {
-            sprintf(LatWrite,"%.6f",latitud*0.01);
-            sprintf(LonWrite,"%.6f",longitud*0.01);
-            for(int index = 1; index < 10; index++)
-            {
-               write_eeprom(index, LatWrite[index - 1]);
-               write_eeprom(index + 10, LonWrite[index - 1]);
-            }
-            Save_flag = 0;
-         }
-      }
-      else
-      {
-         // printf("%lu | %lu\r\n", Motor_CCP2, y2);
-          if(Save_flag == 0)
-          {
-            for(int index = 1; index < 10; index++)
-            {
-                LatRead[index - 1] = read_eeprom(index);
-                LonRead[index - 1] = read_eeprom(index + 10);
-            }
-            // Discomment this for testing purposes
-          //  printf("LatRead: %.6f\r\n", atof(LatRead));
-            //delay_ms(5);
-          //  printf("LonRead: %.6f\r\n", atof(LonRead));
-            //delay_ms(5);
-          //  printf("Numero: %s%s \r\n", _Cel1, _Cel2);
-            //delay_ms(10);
-            
-            Save_flag = 1;
-          }
       }
       
       If_Message(); 

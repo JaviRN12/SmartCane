@@ -22,9 +22,9 @@ float meanfilter = 0;
 int16 filterbuffer = 0;
 int GPS_Cnt = 0, Us_Cnt = 0, GPS_Connected = 0;
 int Save_flag = 0;
-int GPS_Counter = 0;
-char LatWrite[10];
-char LonWrite[10];
+int GPS_Counter = 0, timerCount = 0, timerCount2 = 0;
+char LatWrite[10], LatRead[10];
+char LonWrite[10], LonRead[10];
 
 enum Power
 {
