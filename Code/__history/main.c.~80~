@@ -242,8 +242,8 @@ void main()
          {
             // sprintf(LatWrite,"%.6f",latitud*0.01);
             // sprintf(LonWrite,"%.6f",longitud*0.01);
-            latitudConverted  = (float) ( (int8) (latitud * 0.01)  + (float) (((latitud * 0.01)  - (int8) (latitud * 0.01))  / 60.0) );
-            longitudConverted = (float) ( (int8) (longitud * 0.01) + (float) (((longitud * 0.01) - (int8) (longitud * 0.01)) / 60.0) );
+            latitudConverted  = (float)((int8)(latitud*0.01)  + (float)(((latitud*0.01)  - (int8)(latitud*0.01))  / 60.0));
+            longitudConverted = (float)((int8)(longitud*0.01) + (float)(((longitud*0.01) - (int8)(longitud*0.01)) / 60.0));
             sprintf(LatWrite,"%.6f", latitudConverted);
             sprintf(LonWrite,"%.6f", longitudConverted);
             for(int index = 1; index < 10; index++)

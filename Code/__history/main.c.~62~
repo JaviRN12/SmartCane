@@ -5,7 +5,7 @@
 #device adc = 12
 //#use delay (clock = 4000000)
 #use delay(clock=8000000) 
-#use RS232(uart1,BAUD=9600, BITS=8, PARITY=N, XMIT=PIN_C6, RCV=PIN_C7,STREAM = DATA1)
+#use RS232(BAUD=9600, BITS=8, PARITY=N, XMIT=PIN_C6, RCV=PIN_C7)
 #include <stdlib.h>
 #include <stdio.h>
 #define MAX_TIMER_PRESET 60000
@@ -15,6 +15,7 @@
 #define LIMTED_POWER 180
 #define ADC_SAMPLES 1
 #define get_voltage(dataADC) (float) (dataADC * (5.0 / 1023.0))// 4095.0))
+#define Send_Message INPUT(pin_B6)
 
 int counterLED = 0;
 int samplesCounter = 0;
@@ -22,7 +23,9 @@ float meanfilter = 0;
 int16 filterbuffer = 0;
 int GPS_Cnt = 0, Us_Cnt = 0, GPS_Connected = 0;
 int Save_flag = 0;
-int GPS_Counter = 0, timerCount = 0, timerCount2 = 0;
+int GPS_Counter = 0;
+char LatWrite[10];
+char LonWrite[10];
 
 enum Power
 {
@@ -45,7 +48,7 @@ void If_Message(void);
 void rda_isr()
 {
    c = getchar ();
-   
+   output_toggle(pin_a5);
    IF (c == '$')
    {
       i = 0;
@@ -114,7 +117,7 @@ void t0()
    }
 
    GPS_Counter++;
-   if(GPS_Counter == 80)
+   if(GPS_Counter == 1000)
    {
       if(t_flag == 1)
       {
@@ -142,17 +145,22 @@ void main()
    enable_interrupts(GLOBAL);
    set_timer0( MAX_TIMER_PRESET );
    setup_timer_0( T0_DIV_1 );
-   
+   //set_tris_c(0b00001110);
    //Setup_Oscillator parameter not selected from Intr Oscillator Config tab
    Motor1_Start ();
    start_alert ();
    setup_timer_2 (T2_DIV_BY_16, 255, 1) ;
    //INT m = Salidas.a;
 
+   //output_high(pin_c6);
+   //output_high(pin_c7);
+   //output_high(pin_c5);
+   //output_high(pin_b0);
    // TODO: USER CODE!!
    WHILE (TRUE)
    {
-      
+      //printf("<@43223>");
+      //delay_ms(200);
       set_adc_channel(0);
       delay_us(10);
       data_adc0 = read_adc();
@@ -167,7 +175,7 @@ void main()
       
       if( MIN_ADC_MEASURE > data_adc0)
       {
-         output_toggle(pin_a5);
+         //output_toggle(pin_a5);
          duty1 = MAX_POWER;
       }
       else
@@ -176,7 +184,8 @@ void main()
       }
       //volt_adc0 = get_voltage(data_adc0);
       
-      set_pwm1_duty((int8)duty1);
+      //set_pwm1_duty((int8)duty1);
+      set_pwm1_duty((int8)0);
       
       // Bluetooth implementation
       Bluetooth_Config();
@@ -249,9 +258,8 @@ void main()
           }
       }
       
-      If_Message(); 
-     
-      
+      // Send SMS if message requested
+      If_Message();
    }
 }
 
@@ -285,7 +293,7 @@ void start_alert()
    set_pwm2_duty(100);      
    delay_ms(200);
    set_pwm2_duty(0);
-   output_low(PIN_C2); //CCP2
+   output_low(PIN_C1); //CCP2
 }
 
 void If_Message(VOID)
@@ -302,12 +310,15 @@ void If_Message(VOID)
    
    IF (Send_Message)
    {
+      set_pwm2_duty(250);   
+      output_high(pin_a5);
       printf ("AT + CMGF = 1\r") ;
       delay_ms (10);
-      printf("AT+CMGS=\"+52%.0f%.0f\"\r",Num1,Num2);;
+      printf("AT+CMGS=\"+52%.0f%.0f\"\r",Num1,Num2);
       delay_ms (10);
       printf("https://maps.google.com/?q=%.6f,-%.6f\x1a\r",atof(LatRead),atof(LonRead));
       delay_ms (1500);
+      set_pwm2_duty(0);   
    }
 }
 
@@ -326,7 +337,7 @@ void Get_GPS(VOID)
          }
 
          latitud = atof (lat);
-         output_toggle (pin_b2);
+         //output_toggle (pin_b5);
       }
 
       /////////////////// Cuando str[4] = M obtenemos de la trama los valores de longitud en string
@@ -351,7 +362,7 @@ void Bluetooth_Config(void)
    {
       if(str[1]=='@')
             {
-              // output_toggle(pin_e2);
+               set_pwm2_duty(250);
                for(int index = 0; index < 10; index++)
                {
                    write_eeprom(index + 25, str[index + 2]);
@@ -359,6 +370,16 @@ void Bluetooth_Config(void)
             }
       //Cel = atoi(Num);
       //sprintf(Num,"%i",Cel);
+      //output_toggle(pin_a5);
    }
    str_flag2 = 0;
 }
+
+
+
+ 
+/*
+T1 Conectar
+Conectar B6/PGC al push por abajo
+con el que tiene la resistencia a tierra y que va al pin 
+*/

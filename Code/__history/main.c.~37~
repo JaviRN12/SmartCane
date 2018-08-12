@@ -15,6 +15,7 @@
 #define LIMTED_POWER 180
 #define ADC_SAMPLES 1
 #define get_voltage(dataADC) (float) (dataADC * (5.0 / 1023.0))// 4095.0))
+#define Send_Message INPUT(pin_B5)
 
 int counterLED = 0;
 int samplesCounter = 0;
@@ -22,7 +23,7 @@ float meanfilter = 0;
 int16 filterbuffer = 0;
 int GPS_Cnt = 0, Us_Cnt = 0, GPS_Connected = 0;
 int Save_flag = 0;
-int GPS_Counter = 0, timerCount = 0, timerCount2 = 0;
+int GPS_Counter = 0;
 char LatWrite[10];
 char LonWrite[10];
 
@@ -47,7 +48,7 @@ void If_Message(void);
 void rda_isr()
 {
    c = getchar ();
-   
+   output_toggle(pin_a5);
    IF (c == '$')
    {
       i = 0;
@@ -144,7 +145,7 @@ void main()
    enable_interrupts(GLOBAL);
    set_timer0( MAX_TIMER_PRESET );
    setup_timer_0( T0_DIV_1 );
-   
+   //set_tris_c(0b00001110);
    //Setup_Oscillator parameter not selected from Intr Oscillator Config tab
    Motor1_Start ();
    start_alert ();
@@ -154,7 +155,7 @@ void main()
    // TODO: USER CODE!!
    WHILE (TRUE)
    {
-      
+      //output_toggle(pin_a5);
       set_adc_channel(0);
       delay_us(10);
       data_adc0 = read_adc();
@@ -169,7 +170,7 @@ void main()
       
       if( MIN_ADC_MEASURE > data_adc0)
       {
-         output_toggle(pin_a5);
+         //output_toggle(pin_a5);
          duty1 = MAX_POWER;
       }
       else
@@ -251,9 +252,8 @@ void main()
           }
       }
       
-      If_Message(); 
-     
-      
+      // Send SMS if message requested
+      If_Message();
    }
 }
 
@@ -304,6 +304,7 @@ void If_Message(VOID)
    
    IF (Send_Message)
    {
+      //output_high(pin_a5);
       printf ("AT + CMGF = 1\r") ;
       delay_ms (10);
       printf("AT+CMGS=\"+52%.0f%.0f\"\r",Num1,Num2);;
@@ -328,7 +329,7 @@ void Get_GPS(VOID)
          }
 
          latitud = atof (lat);
-         output_toggle (pin_b2);
+         //output_toggle (pin_b5);
       }
 
       /////////////////// Cuando str[4] = M obtenemos de la trama los valores de longitud en string
@@ -361,6 +362,7 @@ void Bluetooth_Config(void)
             }
       //Cel = atoi(Num);
       //sprintf(Num,"%i",Cel);
+      output_toggle(pin_a5);
    }
    str_flag2 = 0;
 }

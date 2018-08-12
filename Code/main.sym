@@ -1,0 +1,264 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004     @INTERRUPT_AREA
+005     @INTERRUPT_AREA
+006     @INTERRUPT_AREA
+007     @INTERRUPT_AREA
+008     @INTERRUPT_AREA
+009     @INTERRUPT_AREA
+00A     @INTERRUPT_AREA
+00B     @INTERRUPT_AREA
+00C     @INTERRUPT_AREA
+00D     @INTERRUPT_AREA
+00E     @INTERRUPT_AREA
+00F     @INTERRUPT_AREA
+010     @INTERRUPT_AREA
+011     @INTERRUPT_AREA
+012     @INTERRUPT_AREA
+013     @INTERRUPT_AREA
+014     @INTERRUPT_AREA
+015     @INTERRUPT_AREA
+016     @INTERRUPT_AREA
+017     @INTERRUPT_AREA
+018     @INTERRUPT_AREA
+019     str_flag
+01A     t_flag
+01B     flag_buf
+01C     str_flag2
+01D     duty
+01E     duty1
+01F     duty2
+020     i
+021     c
+022-120 str
+121-21F buf
+220-229 LatRead
+22A-233 LonRead
+234-235 data_adc0
+236-237 data_adc1
+238-239 Pa
+23A-23B Pb
+23C-23F volt_adc0
+240-243 volt_adc1
+244-247 latitud
+248-24B longitud
+24C-253 _Cel1
+254-25B _Cel2
+25C-25F Num1
+260-263 Num2
+264-265 strtok.save
+266-269 _Randseed
+26A     counterLED
+26B     samplesCounter
+26C-26F meanfilter
+270-271 filterbuffer
+272     GPS_Cnt
+273     Us_Cnt
+274     GPS_Connected
+275     Save_flag
+276     GPS_Counter
+277-280 LatWrite
+281-28A LonWrite
+28B-28E latitudConverted
+28F-292 longitudConverted
+293-294 @sprintf_string
+295     MAIN.index
+296     MAIN.index
+297     If_Message.indexM
+297     Bluetooth_Config.index
+297-29F Get_GPS.lat
+297-29A @FLT.P1
+297-29A @PRINTF_L32D_972FPFPF.P2
+297     MAIN.@SCRATCH1
+298     MAIN.@SCRATCH2
+298     If_Message.@SCRATCH1
+298     @PSTRINGC_658.@SCRATCH1
+298     Bluetooth_Config.@SCRATCH1
+299     @delay_ms1.P1
+299     MAIN.@SCRATCH3
+299     If_Message.@SCRATCH2
+299     @PSTRINGC_658.@SCRATCH2
+299     Bluetooth_Config.@SCRATCH2
+29A     MAIN.@SCRATCH4
+29A     If_Message.@SCRATCH3
+29B     @PRINTF_L32D_972FPFPF.P1
+29B-29E @FLT.P2
+29B     MAIN.@SCRATCH5
+29B     If_Message.@SCRATCH4
+29C-29F @SFTOI.P1
+29C     @PRINTF_L32D_972FPFPF.@SCRATCH1
+29C     If_Message.@SCRATCH5
+29D     @PRINTF_L32D_972FPFPF.@SCRATCH2
+29D     If_Message.@SCRATCH6
+29E     @PRINTF_L32D_972FPFPF.@SCRATCH3
+29E     If_Message.@SCRATCH7
+29F     @FLT.@SCRATCH1
+29F     @PRINTF_L32D_972FPFPF.@SCRATCH4
+29F     If_Message.@SCRATCH8
+2A0     @PSTRINGCN_658.P1
+2A0-2A3 @PRINTF_L32D_658FPFPF.P2
+2A0-2A9 Get_GPS.lg
+2A0     @FLT.@SCRATCH2
+2A0     @PRINTF_L32D_972FPFPF.@SCRATCH5
+2A1     @PRINTF_L32D_972FPFPF.@SCRATCH6
+2A1     @PSTRINGCN_658.@SCRATCH1
+2A2     @PRINTF_L32D_972FPFPF.@SCRATCH7
+2A2     @PSTRINGCN_658.@SCRATCH2
+2A3     @PRINTF_L32D_972FPFPF.@SCRATCH8
+2A4     @PRINTF_L32D_658FPFPF.P1
+2A4     @SPRINTF.P2
+2A5     @PRINTF_L32D_658FPFPF.@SCRATCH1
+2A6     @PRINTF_L32D_658FPFPF.@SCRATCH2
+2A7     @PRINTF_L32D_658FPFPF.@SCRATCH3
+2A8     @PRINTF_L32D_658FPFPF.@SCRATCH4
+2A9     @PRINTF_L32D_658FPFPF.@SCRATCH5
+2AA     Get_GPS.index
+2AA     @PRINTF_L32D_658FPFPF.@SCRATCH6
+2AB     Get_GPS.index
+2AB     @PRINTF_L32D_658FPFPF.@SCRATCH7
+2AC-2AD strtof.s
+2AC     @PRINTF_L32D_658FPFPF.@SCRATCH8
+2AC     Get_GPS.@SCRATCH1
+2AD-2B0 @DIV3232.P1
+2AD     @PUTCHAR_1_.P2
+2AD-2B0 @FTOSD.P3
+2AD     Get_GPS.@SCRATCH2
+2AE-2AF strtof.endptr
+2AE     Get_GPS.@SCRATCH3
+2B0-2B3 strtof.pow10
+2B1-2B4 @DIV3232.P1
+2B1     @FTOSD.@SCRATCH1
+2B4-2B7 strtof.result
+2B5     @DIV3232.@SCRATCH1
+2B6     @DIV3232.@SCRATCH2
+2B7     @DIV3232.@SCRATCH3
+2B8.0   strtof.skip
+2B8.1   strtof.sign
+2B8.2   strtof.point
+2B8     @DIV3232.@SCRATCH4
+2B9     strtof.c
+2B9     @DIV3232.@SCRATCH5
+2BA     strtof.ptr
+2BB-2BE @MULFF.P1
+2BB     strtof.@SCRATCH1
+2BC     strtof.@SCRATCH2
+2BD     strtof.@SCRATCH3
+2BE     strtof.@SCRATCH4
+2BF-2C0 @ITOF.P1
+2BF-2C2 @DIVFF.P2
+2BF-2C2 @MULFF.P3
+2BF-2C2 @ADDFF.P4
+2C3-2C6 @ADDFF.P1
+2C3-2C6 @DIVFF.P2
+2C3     @MULFF.@SCRATCH1
+2C4     @MULFF.@SCRATCH2
+2C5     @MULFF.@SCRATCH3
+2C7     @ADDFF.@SCRATCH1
+2C7     @DIVFF.@SCRATCH1
+2C8     @ADDFF.@SCRATCH2
+2C8     @DIVFF.@SCRATCH2
+2C9     @ADDFF.@SCRATCH3
+2C9     @DIVFF.@SCRATCH3
+2CA     @ADDFF.@SCRATCH4
+2CA     @DIVFF.@SCRATCH4
+2CB     @ADDFF.@SCRATCH5
+2CB     @DIVFF.@SCRATCH5
+2CC     @ADDFF.@SCRATCH6
+2CC     @DIVFF.@SCRATCH6
+2CD     @ADDFF.@SCRATCH7
+2CE     @ADDFF.@SCRATCH8
+2CF     @GETCH_1_.@SCRATCH1
+2CF     rda_isr.@SCRATCH1
+2D0     rda_isr.@SCRATCH2
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2
+FBB     CCP_2_LOW
+FBC     CCP_2_HIGH
+FBE     CCP_1
+FBE     CCP_1_LOW
+FBF     CCP_1_HIGH
+FE1-FE2 @WRITE_PACKED_MEMORY.P1
+FE1-FE2 @READ_PACKED_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P1
+FE9-FEA @WRITE_PROGRAM_MEMORY.P2
+FE9-FEA @READ_PACKED_MEMORY.P3
+FE9-FEA @WRITE_PACKED_MEMORY.P4
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+0000BA  @GETCH_1_
+000104  rda_isr
+0001AA  t0
+0001EC  @const986.call
+0001F8  @const988.call
+000210  @const994.call
+000238  @delay_ms1
+000260  Motor1_Start
+0002B6  start_alert
+0002F2  @ITOF
+000328  @MULFF
+00041E  @ADDFF
+000696  @SFTOI
+0006D2  Bluetooth_Config
+00073C  @DIVFF
+00089A  strtof
+000AE4  Get_GPS
+000BC0  @FLT
+000C3A  @FTOSD
+000C7C  @DIV3232
+000D10  @SPRINTF
+000D30  @PRINTF_L32D_972FPFPF
+000ED8  @PUTCHAR_1_
+000F1C  @PSTRINGC_658
+000F3E  @PSTRINGCN_658
+000F66  @PRINTF_L32D_658FPFPF
+00110E  If_Message
+001324  MAIN
+001324  @cinit1
+001386  @cinit2
+0136  StrtoulGO
+0136  StrtolGO
+
+Project Directory:
+    C:\Users\Luis Enrique\Documents\GitHub\SmartCane\Code\
+
+Project Files:
+    main.c                                                  [09-ago.-18 21:34  CRC=43FCE6F5]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F2553.h [18-abr.-14 16:56  CRC=43FD2AFF]
+    Definitions.h                                           [09-jul.-18 23:06  CRC=9F332F79]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h [08-jun.-11 14:39  CRC=0B6669CF]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h [16-jul.-10 09:27  CRC=897CEC6C]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\string.h [10-abr.-14 09:04  CRC=662B2714]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h [03-ene.-08 13:55  CRC=2D1F019F]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdio.h [31-jul.-07 13:24  CRC=4E4534F4]
+
+Source signature=EBE52A43
+
+Units:
+    main (main)
+
+Compiler Settings:
+    Processor:      PIC18F2553
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:       CCS5
+
+Output Files:
+    XREF file:   main.xsym
+    Errors:      main.err
+    Ext Symbols: main.esym
+    INHX32:      main.hex
+    Symbols:     main.sym
+    List:        main.lst
+    Debug/COFF:  main.cof
+    Project:     main.ccspjt
+    Call Tree:   main.tre
+    Statistics:  main.STA
