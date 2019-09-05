@@ -18,9 +18,12 @@ Type=4
 [ProjectLog]
 Days=1
 D1=04-09-2019
-D1_L=2
+D1_L=5
 D1_L1=[76554]Stopped Editing.
 D1_L2=[81993]Started Editing.
+D1_L3=[82386]Stopped Editing.
+D1_L4=[82425]Project Closed.
+D1_L5=[82443]Project Opened.
 [Units]
 Count=1
 1=main (main)

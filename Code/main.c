@@ -14,6 +14,7 @@ void process_tel_number();
 void Get_GPS();
 void gps_info_processor(void);
 void dummyFunction(char characterRecived);
+int16 AdcReadAndProcessing();
 
 #INT_TIMER0
 void t0()
@@ -41,26 +42,14 @@ void rda_isr()
 
 void main()
 {
+   int16 distancePower;
    setup();
    start_alert();
    Motor1_Start(); // Starts motor and confgures timer2
    
    while(TRUE)
-   {
-      set_adc_channel(0);
-      delay_us(20);
-      data_adc0  = read_adc();     // 0 - 1024 bits
-      if(data_adc0 > DISTANCE_LIMIT)
-      {
-         data_adc0 = DISTANCE_LIMIT;
-      }
-      
-      mmDistance = 7680 - ((data_adc0*2) * 5.0); // 0 - 2500mm
-   
-      voltage    = (mmDistance/(1000.0));  // convert distance to voltage, the higher the distance, the higher the voltage.
-                                           // *2 due to we want the volteage to reach up to 5 volts
-      
-      distancePower = (int16)(voltage * 49);
+   {    
+      distancePower = AdcReadAndProcessing();
       set_pwm1_duty(distancePower);
       Get_GPS();
       gps_info_processor();
@@ -100,10 +89,11 @@ void start_alert()
 
 void Motor1_Start()
 {
+   int duty = 100;
+
    output_low(PIN_C2); //CCP1
    setup_ccp1(CCP_PWM);
    setup_timer_2(T2_DIV_BY_16, 255, 1);
-   duty = 100;
    set_pwm1_duty(duty);        
    delay_ms(250);
    duty = 0;
@@ -119,14 +109,16 @@ void Motor1_Start()
 
 void If_Message(VOID)
 {
+   char _Cel1[8], _Cel2[8];
+
    for (INT indexM = 0; indexM < 5; IndexM++)
    {
       _Cel1[indexM] = read_eeprom (indexM + 25);
       _Cel2[indexM] = read_eeprom (indexM + 30);
    }
 
-   Num1 = atof (_Cel1);
-   Num2 = atof (_Cel2);
+   float Num1 = atof (_Cel1);
+   float Num2 = atof (_Cel2);
    
    for (int index = 1; index < 10; index++)
    {
@@ -176,7 +168,7 @@ void process_tel_number()
    str_flag2 = 0;
 }
 
-void Get_GPS(VOID)
+void Get_GPS(void)
 {
    char lat[9], lg[10];
 
@@ -305,4 +297,28 @@ void dummyFunction(char characterRecived)
          i++;
       }
    }
+}
+
+int16 AdcReadAndProcessing()
+{
+   int16 data_adc0 = 0, mmDistance = 0, distancePower = 0; 
+
+   set_adc_channel(0);
+   delay_us(20);
+
+   data_adc0  = read_adc();     // 0 - 1024 bits
+   
+   if(data_adc0 > DISTANCE_LIMIT)
+   {
+      data_adc0 = DISTANCE_LIMIT;
+   }
+   
+   mmDistance = 7680 - ((data_adc0*2) * 5.0); // 0 - 2500mm
+
+   voltage    = (mmDistance/(1000.0));  // convert distance to voltage, the higher the distance, the higher the voltage.
+                                          // *2 due to we want the volteage to reach up to 5 volts
+   
+   distancePower = (int16)(voltage * 49);
+
+   return(distancePower);
 }
