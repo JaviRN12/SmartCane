@@ -37,6 +37,10 @@ void rda_isr()
 {
    volatile char characterRecived = getchar ();
    dummyFunction(characterRecived);
+   //c = getchar ();
+   //output_toggle(pin_a4);
+
+
 }
 
 void main()
@@ -128,13 +132,13 @@ void If_Message(VOID)
    Num1 = atof (_Cel1);
    Num2 = atof (_Cel2);
    
-   for (int index = 1; index < 10; index++)
+   for(int index = 1; index < 10; index++)
    {
       LatRead[index - 1] = read_eeprom(index);
       LonRead[index - 1] = read_eeprom(index + 10);
    }
    
-   if (Send_Message)
+   IF (Send_Message)
    {
       set_pwm2_duty(5);   
       output_high(pin_a4);
@@ -180,10 +184,10 @@ void Get_GPS(VOID)
 {
    char lat[9], lg[10];
 
-   if ( (str_flag == 1 ) && (savePosition == 1) )
+   IF ( (str_flag == 1 ) && (savePosition == 1) )
    {
       ///////////////////// Si el str[4] == G obtenemos de la trama los valores de la latitud
-      if (str[4] == 'G')
+      IF (str[4] == 'G')
       {
          for (INT index = 0; index < 9; index++)
          {
@@ -195,7 +199,7 @@ void Get_GPS(VOID)
       }
 
       /////////////////// Cuando str[4] = M obtenemos de la trama los valores de longitud en string
-      else if (str[4] == 'M')
+      else IF (str[4] == 'M')
       {
          for (INT index = 0; index < 10; index++)
          {
@@ -301,7 +305,7 @@ void dummyFunction(char characterRecived)
 
       else
       {
-         buf[i] = characterRecived;
+         buf[i] = c;
          i++;
       }
    }

@@ -1,0 +1,26 @@
+[PROJECT]
+Target=main.hex
+Processor_Text=PIC18F2553
+CCSVersion=5.025
+Compiler=PCH
+[Target Data]
+FileList=main.c
+[main.c]
+Type=4
+[mru-list]
+1=main.c
+
+[Opened Files]
+1=main.c
+2=Definitions.h
+3=
+
+[ProjectLog]
+Days=1
+D1=04-09-2019
+D1_L=2
+D1_L1=[76554]Stopped Editing.
+D1_L2=[81993]Started Editing.
+[Units]
+Count=1
+1=main (main)
