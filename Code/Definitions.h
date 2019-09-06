@@ -23,18 +23,10 @@ char LonWrite[10];
 float latitudConverted  = 0;
 float longitudConverted = 0;
 
-// Power Moduled variables
-//int duty = 0;
-
-// Phone message variables
-//char _Cel1[8], _Cel2[8];
-//float Num1, Num2;
-
 // Buffer variables 
 volatile char str[buf_length], buf[buf_length];
 int str_flag = 0, flag_buf = 0, str_flag2=0;
 int i = 0;
 
-// ADC Variables
-//int16 data_adc0 = 0, mmDistance = 0, distancePower = 0; 
+// ADC Variables 
 float voltage = 0;

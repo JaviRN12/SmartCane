@@ -46,6 +46,7 @@ void main()
    setup();
    start_alert();
    Motor1_Start(); // Starts motor and confgures timer2
+   set_adc_channel(0);
    
    while(TRUE)
    {    
@@ -303,9 +304,7 @@ int16 AdcReadAndProcessing()
 {
    int16 data_adc0 = 0, mmDistance = 0, distancePower = 0; 
 
-   set_adc_channel(0);
    delay_us(20);
-
    data_adc0  = read_adc();     // 0 - 1024 bits
    
    if(data_adc0 > DISTANCE_LIMIT)
