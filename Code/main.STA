@@ -13,16 +13,16 @@ Stack size: 31
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  326   183  34  main.c
+  324   183  34  main.c
   766     0   0  ..\..\..\..\Program Files (x86)\PICC\Devices\18F2553.h
-   41     0   0  Definitions.h
+   37     0   0  Definitions.h
  1351   359  66  ..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h
    32     0   0  ..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h
   423     0   0  ..\..\..\..\Program Files (x86)\PICC\Drivers\string.h
    28     0   0  ..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h
    37     0   0  ..\..\..\..\Program Files (x86)\PICC\Drivers\stdio.h
 ----- -----
- 3004   542 Total
+ 2998   542 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
@@ -32,28 +32,28 @@ Page ROM  %  RAM    Vol Diff  Functions:
 0    632   5   16   1528  9.3  @ADDFF
 0    350   3   14   1528  9.3  @DIVFF
 0    588   4   19   1542 12.4  strtof
-0     44   0    0    176  3.5  t0
+0     44   0    0    163  3.1  t0
 0     24   0    1     45  1.7  rda_isr
 0    192   1    2    195  2.2  MAIN
 0     50   0    0    212  2.3  setup
 0     78   1    0    270  1.9  start_alert
 0     90   1    1    357  2.4  Motor1_Start
 0    626   5   24   1057  5.9  If_Message
-0     12   0    0   1057  5.9  @const953
+0     12   0    0   1057  5.9  @const960
 0     36   0    2             @PSTRINGC_9600_31766_31767
-0     24   0    0             @const955
+0     24   0    0             @const962
 0     42   0    3             @PSTRINGCN_9600_31766_31767
 0     66   0    5             @FTOSD
 0    148   1   13             @DIV3232
 0    422   3   13             @PRINTF_L32D_9600_31766_31767FPFPF
-0     40   0    0             @const966
+0     40   0    0             @const973
 0    180   1    2    520  5.7  process_tel_number
 0    224   2   22    652  6.9  Get_GPS
 0   1270   9    5   1528  9.3  gps_info_processor
 0    122   1   10   1528  9.3  @FLT
 0     60   0    4             @SFTOI
 0     32   0    1             @SPRINTF
-0    424   3   13             @PRINTF_L32D_979FPFPF
+0    424   3   13             @PRINTF_L32D_986FPFPF
 0    158   1    3    673  4.8  dummyFunction
 0    314   2    8    359  5.1  AdcReadAndProcessing
  Inline         0             @cinit1
@@ -61,14 +61,14 @@ Page ROM  %  RAM    Vol Diff  Functions:
 Program metrics:
     Functions               19
     Statements              542
-    Comments                740
-    Volume (V)              26385
-    Difficulty (D)          115.9
-    Effort to implement (E) 3057020
-    Time to implement (T)   47 hours, 11 minutes
+    Comments                735
+    Volume (V)              26359
+    Difficulty (D)          115.4
+    Effort to implement (E) 3040908
+    Time to implement (T)   46 hours, 56 minutes
     Est Delivered Bugs (B)  7
     Cyclomatic Complexity   59
-    Maintainability (MI)    66
+    Maintainability (MI)    68
 
  Segment     Used  Free
 -----------  ----  ----

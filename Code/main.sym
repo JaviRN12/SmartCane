@@ -47,14 +47,14 @@
 25E-261 voltage
 262-263 @sprintf_string
 264-265 MAIN.distancePower
-266     Motor1_Start.duty
-266     gps_info_processor.index
 266-267 AdcReadAndProcessing.data_adc0
+266     Motor1_Start.duty
 266-26D If_Message._Cel1
-266-26E Get_GPS.lat
 266     process_tel_number.index
-267-26A @FLT.P1
-267-26A @PRINTF_L32D_979FPFPF.P2
+266-26E Get_GPS.lat
+266     gps_info_processor.index
+267-26A @PRINTF_L32D_986FPFPF.P1
+267-26A @FLT.P2
 267     process_tel_number.@SCRATCH1
 267     gps_info_processor.@SCRATCH1
 268-269 AdcReadAndProcessing.mmDistance
@@ -63,24 +63,24 @@
 269     gps_info_processor.@SCRATCH3
 26A-26B AdcReadAndProcessing.distancePower
 26A     gps_info_processor.@SCRATCH4
-26B     @PRINTF_L32D_979FPFPF.P1
-26B-26E @FLT.P2
+26B-26E @FLT.P1
+26B     @PRINTF_L32D_986FPFPF.P2
 26B     gps_info_processor.@SCRATCH5
 26C-26F @SFTOI.P1
-26C     @PRINTF_L32D_979FPFPF.@SCRATCH1
+26C     @PRINTF_L32D_986FPFPF.@SCRATCH1
 26C     AdcReadAndProcessing.@SCRATCH1
-26D     @PRINTF_L32D_979FPFPF.@SCRATCH2
+26D     @PRINTF_L32D_986FPFPF.@SCRATCH2
 26D     AdcReadAndProcessing.@SCRATCH2
 26E-275 If_Message._Cel2
-26E     @PRINTF_L32D_979FPFPF.@SCRATCH3
+26E     @PRINTF_L32D_986FPFPF.@SCRATCH3
 26F-278 Get_GPS.lg
 26F     @FLT.@SCRATCH1
-26F     @PRINTF_L32D_979FPFPF.@SCRATCH4
+26F     @PRINTF_L32D_986FPFPF.@SCRATCH4
 270     @FLT.@SCRATCH2
-270     @PRINTF_L32D_979FPFPF.@SCRATCH5
-271     @PRINTF_L32D_979FPFPF.@SCRATCH6
-272     @PRINTF_L32D_979FPFPF.@SCRATCH7
-273     @PRINTF_L32D_979FPFPF.@SCRATCH8
+270     @PRINTF_L32D_986FPFPF.@SCRATCH5
+271     @PRINTF_L32D_986FPFPF.@SCRATCH6
+272     @PRINTF_L32D_986FPFPF.@SCRATCH7
+273     @PRINTF_L32D_986FPFPF.@SCRATCH8
 274     @SPRINTF.P1
 276     If_Message.indexM
 277-27A If_Message.Num1
@@ -104,13 +104,13 @@
 286-287 strtof.endptr
 286     If_Message.@SCRATCH7
 287     If_Message.@SCRATCH8
+288-28B @PRINTF_L32D_9600_31766_31767FPFPF.P1
 288-28B strtof.pow10
 288     @PSTRINGCN_9600_31766_31767.P1
-288-28B @PRINTF_L32D_9600_31766_31767FPFPF.P2
 289     @PSTRINGCN_9600_31766_31767.@SCRATCH1
 28A     @PSTRINGCN_9600_31766_31767.@SCRATCH2
-28C     @PRINTF_L32D_9600_31766_31767FPFPF.P1
 28C-28F strtof.result
+28C     @PRINTF_L32D_9600_31766_31767FPFPF.P1
 28D     @PRINTF_L32D_9600_31766_31767FPFPF.@SCRATCH1
 28E     @PRINTF_L32D_9600_31766_31767FPFPF.@SCRATCH2
 28F     @PRINTF_L32D_9600_31766_31767FPFPF.@SCRATCH3
@@ -137,8 +137,8 @@
 299-29C @DIV3232.P1
 299-29C @MULFF.P2
 299     @FTOSD.@SCRATCH1
-29B-29E @DIVFF.P1
-29B-29E @ADDFF.P2
+29B-29E @ADDFF.P1
+29B-29E @DIVFF.P2
 29D     @MULFF.@SCRATCH1
 29D     @DIV3232.@SCRATCH1
 29E     @MULFF.@SCRATCH2
@@ -167,17 +167,17 @@
 2AA     dummyFunction.@SCRATCH2
 FB4.6   C1OUT
 FB4.7   C2OUT
-FBB     CCP_2_LOW
 FBB     CCP_2
+FBB     CCP_2_LOW
 FBC     CCP_2_HIGH
-FBE     CCP_1
 FBE     CCP_1_LOW
+FBE     CCP_1
 FBF     CCP_1_HIGH
-FE1-FE2 @WRITE_PACKED_MEMORY.P1
-FE1-FE2 @READ_PACKED_MEMORY.P2
-FE9-FEA @READ_PACKED_MEMORY.P1
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PROGRAM_MEMORY.P1
 FE9-FEA @READ_PROGRAM_MEMORY.P2
-FE9-FEA @WRITE_PROGRAM_MEMORY.P3
+FE9-FEA @READ_PACKED_MEMORY.P3
 FE9-FEA @WRITE_PACKED_MEMORY.P4
 FF6-FF8 @READ_PROGRAM_MEMORY.P1
 FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
@@ -186,9 +186,9 @@ ROM Allocation:
 0000BA  t0
 0000E6  dummyFunction
 000184  rda_isr
-00019C  @const953.call
-0001A8  @const955.call
-0001C0  @const966.call
+00019C  @const960.call
+0001A8  @const962.call
+0001C0  @const973.call
 0001E8  setup
 00021A  @delay_ms1
 000242  start_alert
@@ -205,7 +205,7 @@ ROM Allocation:
 000D08  @FTOSD
 000D4A  @DIV3232
 000DDE  @SPRINTF
-000DFE  @PRINTF_L32D_979FPFPF
+000DFE  @PRINTF_L32D_986FPFPF
 000FA6  gps_info_processor
 00149C  @PSTRINGC_9600_31766_31767
 0014C0  @PSTRINGCN_9600_31766_31767
@@ -222,16 +222,16 @@ Project Directory:
     C:\Users\resen\SmartCane\Code\
 
 Project Files:
-    main.c                                                  [05-sep.-19 20:00  CRC=C29A9313]
+    main.c                                                  [05-sep.-19 20:02  CRC=0F2EE625]
     ..\..\..\..\Program Files (x86)\PICC\Devices\18F2553.h  [18-abr.-14 16:56  CRC=43FD2AFF]
-    Definitions.h                                           [04-sep.-19 23:13  CRC=A1D950C9]
+    Definitions.h                                           [05-sep.-19 22:56  CRC=725DDB69]
     ..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h   [08-jun.-11 14:39  CRC=0B6669CF]
     ..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h   [16-jul.-10 09:27  CRC=897CEC6C]
     ..\..\..\..\Program Files (x86)\PICC\Drivers\string.h   [10-abr.-14 09:04  CRC=662B2714]
     ..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h    [03-ene.-08 13:55  CRC=2D1F019F]
     ..\..\..\..\Program Files (x86)\PICC\Drivers\stdio.h    [31-jul.-07 13:24  CRC=4E4534F4]
 
-Source signature=6D28F7B1
+Source signature=8A41D563
 
 Units:
     main (main)

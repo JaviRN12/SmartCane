@@ -12,7 +12,7 @@ enum
     TEN_SEC = ONE_SEC * 10,
     buf_length = 255,
     DISTANCE_LIMIT = 512
-};
+}
 
 volatile unsigned int8 timerCounter = 0;
 volatile unsigned int16 timerGPS    = 0;
