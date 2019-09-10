@@ -13,8 +13,7 @@ void If_Message(void);
 void process_tel_number();
 void Get_GPS();
 void gps_info_processor(void);
-void dummyFunction(char characterRecived);
-int16 AdcReadAndProcessing();
+void dummyFunction(volatile char characterRecived);
 
 #INT_TIMER0
 void t0()
@@ -38,19 +37,34 @@ void rda_isr()
 {
    volatile char characterRecived = getchar ();
    dummyFunction(characterRecived);
+   //c = getchar ();
+   //output_toggle(pin_a4);
+
+
 }
 
 void main()
 {
-   int16 distancePower;
    setup();
    start_alert();
    Motor1_Start(); // Starts motor and confgures timer2
-   set_adc_channel(0);
    
    while(TRUE)
-   {    
-      distancePower = AdcReadAndProcessing();
+   {
+      set_adc_channel(0);
+      delay_us(20);
+      data_adc0  = read_adc();     // 0 - 1024 bits
+      if(data_adc0 > DISTANCE_LIMIT)
+      {
+         data_adc0 = DISTANCE_LIMIT;
+      }
+      
+      mmDistance = 7680 - ((data_adc0*2) * 5.0); // 0 - 2500mm
+   
+      voltage    = (mmDistance/(1000.0));  // convert distance to voltage, the higher the distance, the higher the voltage.
+                                           // *2 due to we want the volteage to reach up to 5 volts
+      
+      distancePower = (int16)(voltage * 49);
       set_pwm1_duty(distancePower);
       Get_GPS();
       gps_info_processor();
@@ -90,11 +104,10 @@ void start_alert()
 
 void Motor1_Start()
 {
-   int duty = 100;
-
    output_low(PIN_C2); //CCP1
    setup_ccp1(CCP_PWM);
    setup_timer_2(T2_DIV_BY_16, 255, 1);
+   duty = 100;
    set_pwm1_duty(duty);        
    delay_ms(250);
    duty = 0;
@@ -110,24 +123,22 @@ void Motor1_Start()
 
 void If_Message(VOID)
 {
-   char _Cel1[8], _Cel2[8];
-
    for (INT indexM = 0; indexM < 5; IndexM++)
    {
       _Cel1[indexM] = read_eeprom (indexM + 25);
       _Cel2[indexM] = read_eeprom (indexM + 30);
    }
 
-   float Num1 = atof (_Cel1);
-   float Num2 = atof (_Cel2);
+   Num1 = atof (_Cel1);
+   Num2 = atof (_Cel2);
    
-   for (int index = 1; index < 10; index++)
+   for(int index = 1; index < 10; index++)
    {
       LatRead[index - 1] = read_eeprom(index);
       LonRead[index - 1] = read_eeprom(index + 10);
    }
    
-   if (Send_Message)
+   IF (Send_Message)
    {
       set_pwm2_duty(5);   
       output_high(pin_a4);
@@ -169,14 +180,14 @@ void process_tel_number()
    str_flag2 = 0;
 }
 
-void Get_GPS(void)
+void Get_GPS(VOID)
 {
    char lat[9], lg[10];
 
-   if ( (str_flag == 1 ) && (savePosition == 1) )
+   IF ( (str_flag == 1 ) && (savePosition == 1) )
    {
       ///////////////////// Si el str[4] == G obtenemos de la trama los valores de la latitud
-      if (str[4] == 'G')
+      IF (str[4] == 'G')
       {
          for (INT index = 0; index < 9; index++)
          {
@@ -188,7 +199,7 @@ void Get_GPS(void)
       }
 
       /////////////////// Cuando str[4] = M obtenemos de la trama los valores de longitud en string
-      else if (str[4] == 'M')
+      else IF (str[4] == 'M')
       {
          for (INT index = 0; index < 10; index++)
          {
@@ -249,7 +260,7 @@ void gps_info_processor(void)
       }
 }
 
-void dummyFunction(char characterRecived)
+void dummyFunction(volatile char characterRecived)
 {
    if (characterRecived == '$')
    {
@@ -277,7 +288,7 @@ void dummyFunction(char characterRecived)
 
       else
       {
-         buf[i] = characterRecived;
+         buf[i] = c;
          i++;
       }
    }
@@ -294,30 +305,8 @@ void dummyFunction(char characterRecived)
 
       else
       {
-         buf[i] = characterRecived;
+         buf[i] = c;
          i++;
       }
    }
-}
-
-int16 AdcReadAndProcessing()
-{
-   int16 data_adc0 = 0, mmDistance = 0, distancePower = 0; 
-
-   delay_us(20);
-   data_adc0  = read_adc();     // 0 - 1024 bits
-   
-   if(data_adc0 > DISTANCE_LIMIT)
-   {
-      data_adc0 = DISTANCE_LIMIT;
-   }
-   
-   mmDistance = 7680 - ((data_adc0*2) * 5.0); // 0 - 2500mm
-
-   voltage    = (mmDistance/(1000.0));  // convert distance to voltage, the higher the distance, the higher the voltage.
-                                          // *2 due to we want the volteage to reach up to 5 volts
-   
-   distancePower = (int16)(voltage * 49);
-
-   return(distancePower);
 }

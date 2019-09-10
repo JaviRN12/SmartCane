@@ -1,79 +1,81 @@
 
-ROM used:   6576/32768 (20%)
-            6576/32768 (20%) including unused fragments
+ROM used:   6770/32768 (21%)
+            6770/32768 (21%) including unused fragments
 
-            2.2 Average locations per line
-            12.0 Average locations per statement
+            2.3 Average locations per line
+            12.5 Average locations per statement
 
-RAM used:   666/2048 (33%) at main() level
-            721/2048 (35%) worst case
+RAM used:   614/2048 (30%) at main() level
+            683/2048 (33%) worst case
 
 Stack used: 3 worst case (2 in main + 1 for interrupts)
 Stack size: 31
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  405   188  34  main.c
-  766     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F2553.h
-   14     0   0  Definitions.h
- 1351   359  66  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h
-   32     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h
-  423     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\string.h
-   28     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h
-   37     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdio.h
+  324   183  34  main.c
+  766     0   0  ..\..\..\..\Program Files (x86)\PICC\Devices\18F2553.h
+   37     0   0  Definitions.h
+ 1351   359  66  ..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h
+   32     0   0  ..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h
+  423     0   0  ..\..\..\..\Program Files (x86)\PICC\Drivers\string.h
+   28     0   0  ..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h
+   37     0   0  ..\..\..\..\Program Files (x86)\PICC\Drivers\stdio.h
 ----- -----
- 3056   547 Total
+ 2998   542 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
-0     40   0    1             @delay_ms1
-0     68   1    1    239  5.5  @PUTCHAR_1_
-0     74   1    1    496  8.2  @GETCH_1_
+0     40   0    1   1528  9.3  @delay_ms1
 0    246   2   11             @MULFF
-0     54   0    2             @ITOF
-0    632   5   16    239  5.5  @ADDFF
-0    350   3   14   1815 10.5  @DIVFF
-0    586   4   19   1542 12.4  strtof
-0    166   1    2    720  4.8  rda_isr
-0     66   1    0    321  3.7  t0
-0   1680  13    5   2924 10.4  MAIN
-0     60   0    4             @SFTOI
-0    122   1   10             @FLT
-0     32   0    1             @SPRINTF
-0     66   1    5             @FTOSD
+0     54   0    2   1528  9.3  @ITOF
+0    632   5   16   1528  9.3  @ADDFF
+0    350   3   14   1528  9.3  @DIVFF
+0    588   4   19   1542 12.4  strtof
+0     44   0    0    163  3.1  t0
+0     24   0    1     45  1.7  rda_isr
+0    192   1    2    195  2.2  MAIN
+0     50   0    0    212  2.3  setup
+0     78   1    0    270  1.9  start_alert
+0     90   1    1    357  2.4  Motor1_Start
+0    626   5   24   1057  5.9  If_Message
+0     12   0    0   1057  5.9  @const960
+0     36   0    2             @PSTRINGC_9600_31766_31767
+0     24   0    0             @const962
+0     42   0    3             @PSTRINGCN_9600_31766_31767
+0     66   0    5             @FTOSD
 0    148   1   13             @DIV3232
-0    424   3   13             @PRINTF_L32D_972FPFPF
-0     86   1    0    349  2.4  Motor1_Start
-0     60   0    0    195  1.4  start_alert
-0    534   4    8    673  5.2  If_Message
-0     12   0    0    622  5.2  @const986
-0     34   0    2    622  5.2  @PSTRINGC_658
-0     24   0    0    239  5.5  @const988
-0     40   0    3    239  5.5  @PSTRINGCN_658
-0    424   3   13             @PRINTF_L32D_658FPFPF
-0     40   0    0    264  5.5  @const994
-0    220   2   22    681  6.9  Get_GPS
-0    106   1    2    264  5.5  Bluetooth_Config
- Inline         0    239  5.5  @cinit1
+0    422   3   13             @PRINTF_L32D_9600_31766_31767FPFPF
+0     40   0    0             @const973
+0    180   1    2    520  5.7  process_tel_number
+0    224   2   22    652  6.9  Get_GPS
+0   1270   9    5   1528  9.3  gps_info_processor
+0    122   1   10   1528  9.3  @FLT
+0     60   0    4             @SFTOI
+0     32   0    1             @SPRINTF
+0    424   3   13             @PRINTF_L32D_986FPFPF
+0    158   1    3    673  4.8  dummyFunction
+0    314   2    8    359  5.1  AdcReadAndProcessing
+ Inline         0             @cinit1
 
 Program metrics:
     Functions               19
-    Statements              547
-    Comments                775
-    Volume (V)              20551
-    Difficulty (D)          114.8
-    Effort to implement (E) 2359465
-    Time to implement (T)   36 hours, 25 minutes
-    Est Delivered Bugs (B)  6
-    Cyclomatic Complexity   75
-    Maintainability (MI)    57
+    Statements              542
+    Comments                735
+    Volume (V)              26359
+    Difficulty (D)          115.4
+    Effort to implement (E) 3040908
+    Time to implement (T)   46 hours, 56 minutes
+    Est Delivered Bugs (B)  7
+    Cyclomatic Complexity   59
+    Maintainability (MI)    68
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
 00004-00006     0  4  
 00008-000B8   178  0  
-000BA-07FFE  6394  26188  
+000BA-07FFE  6588  25994  
 
 
 
